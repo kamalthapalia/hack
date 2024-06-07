@@ -1,0 +1,47 @@
+import {BiUser} from "react-icons/bi";
+import {LuWheat} from "react-icons/lu";
+import {Link} from "react-router-dom";
+
+const Navbar = () => {
+
+
+    return (
+        <div
+            className={`col-span-2 sticky top-0 border-b  w-full z-5 py-4 px-14 z-[99999] bg-white transition-all`}>
+            <div className={`flex justify-between items-end`}>
+                <div className={`flex items-baseline gap-8`}>
+                    <Link to={`/`}>
+                        <div className={`flex items-baseline gap-3`}>
+                            <LuWheat size={`2em`} className={`relative top-1`}/>
+                            <p className={`text-2xl uppercase font-bold`}>Kisan</p>
+                        </div>
+                    </Link>
+                    <div>
+                        <ul className={`flex items-center gap-2 font-semibold`}>
+                            <Link to={`/market`}>
+                                <li className={`border-b-2 border-gray-500/0 hover:border-blue-400 px-1 transition underline-offset-2 cursor-pointer`}>Marketplace</li>
+                            </Link>
+                            <Link to={`/news`}>
+                                <li className={`border-b-2 border-gray-500/0 hover:border-blue-400 px-1 transition underline-offset-2 cursor-pointer`}>News</li>
+                            </Link>
+                            <Link to={`/about`}>
+                                <li className={`border-b-2 border-gray-500/0 hover:border-blue-400 px-1 transition underline-offset-2 cursor-pointer`}>About</li>
+                            </Link>
+
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <Link to={`/dash`}>
+                        <div
+                            className={`flex items-center font-medium rounded-full p-2 gap-1 bg-gray-200 cursor-pointer px-2`}>
+                            <BiUser className={``} size={`1.2em`}/>
+                        </div>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Navbar;
