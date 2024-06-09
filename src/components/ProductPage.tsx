@@ -1,13 +1,13 @@
 import {AiOutlineClockCircle} from "react-icons/ai";
 import {LuMapPin} from "react-icons/lu";
-import CommentGroup from "./CommentGroup.tsx";
 import {BsChatText} from "react-icons/bs";
+import RelatedProductCardGroup from "./RelatedProductCardGroup.tsx";
 
 const ProductPage = () => {
     return (
         <div className={`container mx-auto my-10`}>
-            <div className={`grid grid-cols-2 gap-10`}>
-                <div className={`flex flex-col gap-3`}>
+            <div className={`grid md:grid-cols-2  relative gap-10`}>
+                <div className={`flex top-0 flex-col gap-3`}>
                     <img
                         className={`h-[500px] w-full object-cover`}
                         src="https://images.pexels.com/photos/14717335/pexels-photo-14717335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -41,8 +41,8 @@ const ProductPage = () => {
                         <BsChatText/>Chat
                     </button>
                 </div>
-                <div>
-                    <CommentGroup/>
+                <div className={`h-[80vh] md:overflow-y-scroll`}>
+                    <RelatedProductCardGroup/>
                 </div>
             </div>
         </div>

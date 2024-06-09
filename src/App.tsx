@@ -12,6 +12,7 @@ import Blogs from "./pages/Blogs.tsx";
 import BlogPage from "./components/BlogPage.tsx";
 import CreateBlog from "./pages/CreateBlog.tsx";
 import About from "./components/About.tsx";
+import ProductPage from "./components/ProductPage.tsx";
 
 function App() {
 
@@ -21,11 +22,11 @@ function App() {
                 <Route path={`/`} element={<General/>}>
                     <Route path={`/`} element={<LandingPage/>}/>
                     <Route path={`/market`} element={<Marketplace/>}/>
-                    <Route path={`/news`} element={<Blogs/>}/>
+                    <Route path={`/blogs`} element={<Blogs/>}/>
                     <Route path={`/about`} element={<About/>}/>
                     <Route path={`/blog/:id`} element={<BlogPage/>}/>
                     <Route path={`/blog/create`} element={<CreateBlog/>}/>
-
+                    <Route path={`/prod/:id`} element={<ProductPage/>}/>
                 </Route>
                 <Route path="/dash" element={<Dashboard/>}>
                     <Route path={`/dash/chat`} element={<Chat/>}/>
