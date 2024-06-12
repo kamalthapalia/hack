@@ -13,6 +13,7 @@ import BlogPage from "./components/BlogPage.tsx";
 import CreateBlog from "./pages/CreateBlog.tsx";
 import About from "./components/About.tsx";
 import ProductPage from "./components/ProductPage.tsx";
+import Login from './components/Login.tsx';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                     <Route path={`/dash/`} element={<Crops/>}/>
                     <Route path={`/dash/me`} element={<Profile/>}/>
                 </Route>
+                <Route path={'/login'} element={<Login />}/>
             </Routes>
         </div>
     )
