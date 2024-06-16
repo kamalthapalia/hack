@@ -1,10 +1,27 @@
-import { useState } from "react"
-import SignField from "./subComponent/SignField";
-import WelcomeNote from "./subComponent/WelcomeNote";
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 
+// components
+import SignField from "../components/subComponent/SignField";
+import WelcomeNote from "../components/subComponent/WelcomeNote";
+// utilities function
+import { serverApi } from "../utils/axios";
 
-export default function LoginPage() {
+export default function AuthPage() {
     const [isOnSignUp, setIsOnSignUp] = useState(true);
+    const navigate = useNavigate();
+
+    useEffect(()=> {
+        const fetchUser = async() => {
+            try {
+                await serverApi.get("/auth");
+                navigate("/");
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchUser();
+    },[])
 
     return (
         <main className={`center-child flex-col md:flex-row w-full max-w-[1400px] h-[100vh] relative text-black`}>

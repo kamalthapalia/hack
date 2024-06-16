@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import MarketCard from "./MarketCard.tsx";
 import { serverApi } from "../utils/axios.ts";
 import { isAxiosError } from "axios";
+import CardSkeleton from "./subComponent/CardSkeleton.tsx";
 
 
 export interface PostType {
@@ -32,9 +33,12 @@ type MarketPlaceType = {
 const MarketCardGroup = () => {
     const [marketPosts, setMarketPosts] = useState([] as PostType[]);
     const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
+            setLoading(true)
+
             try {
                 const res: MarketPlaceType = await serverApi.get('/marketplace');
                 console.log(res.data)
@@ -47,17 +51,27 @@ const MarketCardGroup = () => {
                     setError('An unexpected error occurred');
                 }
             }
+
+            setLoading(false);
         }
         fetchData();
     }, [])
 
     return (
-        <div className={` container mx-auto`}>
+        <div className={` container mx-auto px-4`}>
             <p className={`font-semibold my-10 text-lg`}>Recently added</p>
-            <div className={`grid grid-cols-4 gap-8`}>
-                {marketPosts.map(postDetails => (
-                    <MarketCard key={postDetails._id} postDetails={postDetails} />
-                ))}
+            <div className={`grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4`}>
+                {loading ? (
+                    <div className="flex justify-center items-center h-64 w-full max-w-[600px]">
+                        <CardSkeleton />
+                    </div>
+                ) : (
+                    <Suspense fallback={<CardSkeleton />}>
+                        {marketPosts.map(postDetails => (
+                            <MarketCard key={postDetails._id} postDetails={postDetails} />
+                        ))}
+                    </Suspense>
+                )}
                 <span className=" text-rose-500 text-lg">{error}</span>
             </div>
         </div>
