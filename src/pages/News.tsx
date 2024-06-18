@@ -1,9 +1,14 @@
-const News = () => {
-  return (
-    <div>
-        This is news
-    </div>
-  )
-}
+import DashMenuLayout from "../components/DashMenuLayout.tsx";
+import NewsCardGroup from "../components/NewsCardGroup.tsx";
 
-export default News
+const News = () => {
+    return (
+        <div>
+            <DashMenuLayout title={`News`}>
+                <NewsCardGroup />
+            </DashMenuLayout>
+        </div>
+    );
+};
+
+export default News;

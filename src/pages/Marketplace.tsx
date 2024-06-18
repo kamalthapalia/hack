@@ -1,13 +1,11 @@
-import { Suspense } from "react";
+import DashMenuLayout from "../components/DashMenuLayout.tsx";
 import MarketCardGroup from "../components/MarketCardGroup.tsx";
 
 const Marketplace = () => {
     return (
-        <div>
-            <Suspense fallback={<h2>Loading</h2>}>
-                <MarketCardGroup/>
-            </Suspense>
-        </div>
+        <DashMenuLayout title="Marketplace">
+            <MarketCardGroup />
+        </DashMenuLayout>
     );
 };
 

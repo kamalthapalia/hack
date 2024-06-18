@@ -23,7 +23,7 @@ import News from './pages/News.tsx';
 function App() {
 
     return (
-        <div className={``}>
+        <div className={` mb-4`}>
             <Routes>
                 <Route path={`/`} element={<General />}>
                     <Route path={`/`} element={<LandingPage />} />
@@ -36,9 +36,11 @@ function App() {
                     <Route path={`/prod/:id`} element={<ProductPage />} />
                 </Route>
                 <Route path="/dash" element={<Dashboard />}>
+                    <Route path={`/dash`} element={<Crops />} />
+                    <Route path={`/dash/marketplace`} element={<Marketplace />} />
                     <Route path={`/dash/chat`} element={<Chat />} />
                     <Route path={`/dash/animals`} element={<Animals />} />
-                    <Route path={`/dash`} element={<Crops />} />
+                    <Route path={`/dash/news`} element={<News />} />
                     <Route path={`/dash/me`} element={<Profile />} />
                 </Route>
                 <Route path={'/auth'} element={<Auth />} />

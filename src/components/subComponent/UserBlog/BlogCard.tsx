@@ -1,17 +1,13 @@
 const BlogCard = () => {
     return (
-        <div className={`cursor-pointer`}>
-            <img
-                className={`h-[250px] w-full object-cover`}
-                src="https://images.pexels.com/photos/1509607/pexels-photo-1509607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""/>
+        <div className={`cursor-pointer shadow-md shadow-slate-300 p-4 rounded-lg ease-linear duration-150 hover:scale-105`}>
             <div className={`flex flex-col gap-1.5`}>
                 <div className={`flex justify-between items-center text-sm mt-2 font-semibold text-gray-700`}>
                     <p>Raja Hero</p>
                     <p>1 min ago</p>
                 </div>
-                <p className={`font-bold`}>New Strain of Rice Blast Fungus Threatens Global Food Security</p>
-                <p className={`text-sm font-medium text-gray-700 line-clamp-2`}>Researchers at the International Rice
+                <p className={`font-bold leading-5`}>New Strain of Rice Blast Fungus Threatens Global Food Security</p>
+                <p className={`text-sm font-medium text-gray-700 line-clamp-3`}>Researchers at the International Rice
                     Research
                     Institute (IRRI)
                     have issued a

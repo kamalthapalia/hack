@@ -1,16 +1,13 @@
 import Hero from "./Hero.tsx";
 import MarketCardGroup from "./MarketCardGroup.tsx";
-import BlogCardGroup from "./BlogCardGroup.tsx";
-import { Suspense } from "react";
+import BlogCardGroup from "./subComponent/UserBlog/BlogCardGroup.tsx";
 
 const LandingPage = () => {
     return (
-        <div>
-            <Hero/>
-            <Suspense fallback={<h2>hii</h2>}>
-                <MarketCardGroup/>
-            </Suspense>
-            <BlogCardGroup/>
+        <div className="flex flex-col gap-10">
+            <Hero />
+            <MarketCardGroup />
+            <BlogCardGroup title={"User Blogs"}/>
         </div>
     );
 };

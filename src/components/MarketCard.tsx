@@ -33,9 +33,9 @@ const MarketCard = ({ postDetails }: { postDetails: PostType }) => {
 
 
     return (
-        <div className={`cursor-pointer`}>
+        <div className={`cursor-pointer shadow-[0_15px_40px_-15px_rgba(0,0,0,0.3)] p-4 rounded-lg flex flex-col gap-4 ease-linear duration-150 hover:scale-105`}>
             <img
-                className={`h-[400px] w-full object-cover`}
+                className={`h-[400px] w-full object-cover rounded-md`}
                 // src={`${postDetails.}`}
                 src="https://images.pexels.com/photos/14717335/pexels-photo-14717335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="" />

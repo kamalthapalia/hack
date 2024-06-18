@@ -1,4 +1,4 @@
-import BlogCard from "./BlogCard.tsx";
+import BlogCard from "./NewsCard.tsx";
 
 const BlogCardGroup = () => {
     return (

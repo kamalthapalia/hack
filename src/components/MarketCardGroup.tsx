@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MarketCard from "./MarketCard.tsx";
 import { serverApi } from "../utils/axios.ts";
 import { isAxiosError } from "axios";
@@ -59,18 +59,18 @@ const MarketCardGroup = () => {
 
     return (
         <div className={` container mx-auto px-4`}>
-            <p className={`font-semibold my-10 text-lg`}>Recently added</p>
-            <div className={`grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4`}>
+            <p className={`font-semibold mb-6 text-lg`}>Marketplace Items</p>
+            <div className={`grid xs:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 px-4`}>
                 {loading ? (
                     <div className="flex justify-center items-center h-64 w-full max-w-[600px]">
                         <CardSkeleton />
                     </div>
                 ) : (
-                    <Suspense fallback={<CardSkeleton />}>
+                    <>
                         {marketPosts.map(postDetails => (
                             <MarketCard key={postDetails._id} postDetails={postDetails} />
                         ))}
-                    </Suspense>
+                    </>
                 )}
                 <span className=" text-rose-500 text-lg">{error}</span>
             </div>
