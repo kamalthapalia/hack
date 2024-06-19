@@ -1,6 +1,6 @@
 const BlogCard = () => {
     return (
-        <div className={`cursor-pointer shadow-md shadow-slate-300 p-4 rounded-lg ease-linear duration-150 hover:scale-105`}>
+        <div className={`cardAnimation | shadow-md shadow-slate-300 p-4 rounded-lg`}>
             <div className={`flex flex-col gap-1.5`}>
                 <div className={`flex justify-between items-center text-sm mt-2 font-semibold text-gray-700`}>
                     <p>Raja Hero</p>

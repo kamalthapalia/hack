@@ -1,27 +1,29 @@
-const NewsCard = () => {
-    return (
-        <div className={`cursor-pointer`}>
-            <img
-                className={`h-[250px] w-full object-cover`}
-                src="https://images.pexels.com/photos/1509607/pexels-photo-1509607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""/>
-            <div className={`flex flex-col gap-1.5`}>
-                <div className={`flex justify-between items-center text-sm mt-2 font-semibold text-gray-700`}>
-                    <p>Raja Hero</p>
-                    <p>1 min ago</p>
-                </div>
-                <p className={`font-bold`}>New Strain of Rice Blast Fungus Threatens Global Food Security</p>
-                <p className={`text-sm font-medium text-gray-700 line-clamp-2`}>Researchers at the International Rice
-                    Research
-                    Institute (IRRI)
-                    have issued a
-                    warning about a newly
-                    emerged strain of the rice blast fungus that is showing increased resistance to common fungicides.
-                    Rice blast is one of the most devastating diseases affecting rice crops worldwide, causing annual
-                    losses of over $70 billion.</p>
-            </div>
+import { Link } from "react-router-dom";
+import { NewsDataType } from "../../definations/apiTypes";
+import { timeParser } from "../../utils/timeParser";
 
-        </div>
+const NewsCard = ({ news }: { news: NewsDataType }) => {
+    return (
+        <Link to={news.url} className={` cardAnimation`}>
+            <div>
+                <img
+                    className={`h-[250px] w-full object-cover`}
+                    src={news.urlToImage || "/newsImgNotLoad.jpg"}
+                    alt="Image for news" />
+                <div className={`flex flex-col gap-1.5`}>
+                    <div className={`flex justify-between gap-2 text-sm mt-2 font-semibold text-gray-700`}>
+                        <div className="text-right bg-lime-200 px-2 py-1 rounded-lg">
+                            <p className="">{news.source.name}</p>
+                        </div>
+                        <div className="">
+                            <span className="p-1 bg-slate-200 rounded-t-md rounded-b-sm">{timeParser(news.publishedAt)}</span>
+                        </div>
+                    </div>
+                    <p className={`font-bold`}>{news.title}</p>
+                    <p className={`text-sm font-medium text-gray-700 line-clamp-3`}>{news.description}</p>
+                </div>
+            </div>
+        </Link>
     );
 };
 

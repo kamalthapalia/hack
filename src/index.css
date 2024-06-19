@@ -11,6 +11,9 @@
 		justify-content: center;
 		align-items: center;
 	}
+	.cardAnimation {
+		@apply cursor-pointer shadow-[0_15px_40px_-15px_rgba(0,0,0,0.3)] p-4 rounded-md ease-linear duration-150 hover:scale-105
+	}
 }
 
 :root {

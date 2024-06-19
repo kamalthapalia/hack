@@ -1,37 +1,16 @@
 import { useEffect, useState } from "react";
+// components
 import MarketCard from "./MarketCard.tsx";
+import CardSkeleton from "./subComponent/CardSkeleton.tsx";
+// utils
 import { serverApi } from "../utils/axios.ts";
 import { isAxiosError } from "axios";
-import CardSkeleton from "./subComponent/CardSkeleton.tsx";
 
-
-export interface PostType {
-    date: Date;
-    details: string;
-    itemName: string;
-    location: string;
-    pictureUrl: {
-        path: string,
-        name: string,
-        _id: string
-    },
-    price: number;
-    type: string;
-    userId: string;
-    __v: number;
-    _id: string;
-}
-
-type MarketPlaceType = {
-    data: {
-        data: PostType[],
-        message: string
-    }
-}
-
+// types
+import type{ MarketPlaceType, PostApiType } from "../definations/apiTypes.ts";
 
 const MarketCardGroup = () => {
-    const [marketPosts, setMarketPosts] = useState([] as PostType[]);
+    const [marketPosts, setMarketPosts] = useState([] as PostApiType[]);
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false);
 

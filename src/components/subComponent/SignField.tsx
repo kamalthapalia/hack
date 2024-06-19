@@ -1,11 +1,17 @@
 import { ChangeEvent, FormEvent, useState } from "react"
+import { useNavigate } from "react-router-dom";
+
+// icons
 import { OpenCloseEyeIcon } from "../svgs/FontAwesomeIcons"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
+// components
+import Verification from "../Verification";
+
+// utils & context
 import { serverApi } from "../../utils/axios";
 import { isAxiosError } from "axios";
-import Verification from "../Verification";
 import { useAuth } from "../../context/AuthHook";
-import { useNavigate } from "react-router-dom";
 
 
 
