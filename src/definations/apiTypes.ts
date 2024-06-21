@@ -25,6 +25,7 @@ export interface PostApiType {
     details: string;
     itemName: string;
     location: string;
+    postedBy: string,
     pictureUrl: {
         path: string,
         name: string,

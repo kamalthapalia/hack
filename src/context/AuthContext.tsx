@@ -2,18 +2,8 @@ import { createContext, useEffect, useState } from "react"
 import { serverApi } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
-type UserType = {
-    username: string,
-    userId: string,
-    email: string,
-    phoneNumber: number
-};
-
-type ContextType = {
-    user: UserType,
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => void;
-}
+// types
+import type{ UserType, ContextType } from "../definations/frontendTypes";
 
 export const AuthContext = createContext<ContextType>({
     user: {} as UserType,

@@ -6,7 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import Chat from "./pages/dashPages/Chat.tsx";
 import Animals from "./pages/dashPages/Animals.tsx";
 import Crops from "./pages/dashPages/Crops.tsx";
-import Profile from "./pages/dashPages/Profile.tsx";
+import UserProfile from "./pages/dashPages/UserProfile.tsx";
+import OthersProfile from './pages/dashPages/OthersProfile.tsx';
 import General from "./components/General.tsx";
 import LandingPage from "./components/LandingPage.tsx";
 import Marketplace from "./pages/Marketplace.tsx";
@@ -41,7 +42,8 @@ function App() {
                     <Route path={`/dash/chat`} element={<Chat />} />
                     <Route path={`/dash/animals`} element={<Animals />} />
                     <Route path={`/dash/news`} element={<News />} />
-                    <Route path={`/dash/me`} element={<Profile />} />
+                    <Route path={`/dash/profile/me`} element={<UserProfile />} />
+                    <Route path={`/dash/profile/:userId`} element={<OthersProfile />} />
                 </Route>
                 <Route path={'/auth'} element={<Auth />} />
             </Routes>

@@ -64,7 +64,7 @@ const Sidebar = () => {
 
                     </div>
                     <div className={`mt-auto`}>
-                        <Link to={`/me`}>
+                        <Link to={`/dash/profile/me`}>
                             <div
                                 className={`flex gap-3 items-center border-t border-gray-500/40 pt-2 hover:border-gray-500/40 hover:border transition cursor-pointer rounded p-2.5`}>
                                 <BiUser size={`1.8em`} />

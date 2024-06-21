@@ -20,7 +20,9 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
         username: '',
         email: '',
         password: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        description: '',
+        type: "Farmer"
     })
 
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -34,7 +36,7 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-  
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // data storing
@@ -67,7 +69,7 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
         }
     }
 
-    const handleFormDataChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleFormDataChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
             ...prevState,
@@ -103,10 +105,21 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
                     <OpenCloseEyeIcon icon={passwordVisible ? faEyeSlash : faEye} onClick={() => setPasswordVisible(prevSt => !prevSt)} style={{ cursor: "pointer", position: 'absolute', right: '0.1rem' }} />
                 </div>
                 {isOnSignUp &&
-                    <div className={`inputField ${formData.phoneNumber && "hasContent"}`}>
-                        <span> Phone Number </span>
-                        <input name="phoneNumber" type="number" value={formData.phoneNumber} onChange={(e) => handleFormDataChange(e)} onKeyDown={e => e.key == "ArrowUp" || e.key == 'ArrowDown' ? e.preventDefault() : ''} minLength={10} maxLength={10} required />
-                    </div>
+                    <>
+                        <div className={`inputField ${formData.description && "hasContent"}`}>
+                            <span> Your Description: </span>
+                            <input name="description" type="text" value={formData.description} onChange={(e) => handleFormDataChange(e)} required />
+                        </div>
+                        <div className={`inputField ${formData.phoneNumber && "hasContent"}`}>
+                            <span> Phone Number </span>
+                            <input name="phoneNumber" type="number" value={formData.phoneNumber} onChange={(e) => handleFormDataChange(e)} onKeyDown={e => e.key == "ArrowUp" || e.key == 'ArrowDown' ? e.preventDefault() : ''} minLength={10} maxLength={10} required />
+                        </div>
+                        {/* TODO: Styling and validating */}
+                        <select name="type" onChange={(e)=> handleFormDataChange(e)} defaultValue={"Farmer"}>
+                            <option value="Farmer">Farmer</option>
+                            <option value="Expert">Expert</option>
+                        </select>
+                    </>
                 }
             </div>
             <p className=" bg-red-600 font-bold"> {error} </p>

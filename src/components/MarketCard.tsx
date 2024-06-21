@@ -7,6 +7,7 @@ import { PostApiType } from "../definations/apiTypes";
 // utils
 import { timeParser } from "../utils/timeParser";
 import { commaSeprator } from "../utils/commaSeparator";
+import { Link } from "react-router-dom";
 
 const MarketCard = ({ postDetails }: { postDetails: PostApiType }) => {
 
@@ -18,9 +19,18 @@ const MarketCard = ({ postDetails }: { postDetails: PostApiType }) => {
                 src="https://images.pexels.com/photos/14717335/pexels-photo-14717335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="" />
             <div>
-                <div className={`flex items-center gap-2`}>
-                    <GiGoat className={`w-5 justify-start`} />
-                    <p className={`font-semibold`}>{postDetails.itemName}</p>
+
+                <div className={`flex items-center justify-between pb-1`}>
+                        <Link to={`/dash/profile/${postDetails.userId}`} className=" text-blue-700 font-semibold">By: {postDetails.postedBy ?? "hari krishnea"}</Link>
+                        <span className={`font-semibold py-1 px-4 rounded-t-2xl rounded-b-xl ${postDetails.type == 'sale' ? "bg-rose-200" : "bg-cyan-200"}`}>{postDetails.type}</span>
+                </div>
+
+                <div className={`flex items-center justify-between gap-2`}>
+                    <div className="title | flex items-center gap-1">
+                        <GiGoat className={`w-5 justify-start`} />
+                        <p className={`font-semibold`}>{postDetails.itemName}</p>
+                    </div>
+                    <span className={` text-sm font-light`}>({postDetails.details})</span>
                 </div>
                 <div className={`flex items-center gap-2`}>
                     <AiOutlineDollar className={`w-5 justify-start`} />

@@ -1,6 +1,10 @@
 import DashMenuLayout from "../../components/DashMenuLayout.tsx";
+import { useAuth } from "../../context/AuthHook.ts";
 
-const Profile = () => {
+const UserProfile = () => {
+    const {user} = useAuth();
+    console.log(user)
+
     return (
         <div>
             <DashMenuLayout title={`Profile`}>
@@ -14,26 +18,28 @@ const Profile = () => {
                             />
                         </div>
                         <div>
-                            <p className={`text-xl font-semibold`}>Usher</p>
-                            <p className={`text-sm font-semibold text-gray-500`}>Expert</p>
+                            <p className={`text-xl font-semibold`}>{user.username}</p>
+                            <p className={`text-sm font-semibold text-gray-500`}>{user.type ?? "Farmer"}</p>
                         </div>
                     </div>
                     <div className={`flex flex-col gap-2 w-full`}>
                         <div className={`bg-white p-4 rounded-lg shadow-inner`}>
                             <h3 className={`text-lg font-semibold mb-2`}>About</h3>
-                            <p className={`text-sm text-gray-700`}>Detailed profile description goes here. This can
-                                include biography, interests, professional background, etc.</p>
+                            <p className={`text-sm text-gray-700`}>{user.description || `User Description` }</p>
                         </div>
                         <div className={`bg-white p-4 rounded-lg shadow-inner`}>
                             <h3 className={`text-lg font-semibold mb-2`}>Contact Information</h3>
-                            <p className={`text-sm text-gray-700`}>Email: usher@example.com</p>
-                            <p className={`text-sm text-gray-700`}>Phone: (123) 456-7890</p>
+                            <p className={`text-sm text-gray-700`}>Email: {user.email}</p>
+                            <p className={`text-sm text-gray-700`}>Phone: {user.phoneNumber}</p>
                         </div>
-                        <div className={`bg-white p-4 rounded-lg shadow-inner`}>
+
+                        {/* TODO: Future goal */}
+                        {/* <div className={`bg-white p-4 rounded-lg shadow-inner`}>
                             <h3 className={`text-lg font-semibold mb-2`}>Additional Information</h3>
+                            Will add in future if seems ok
                             <p className={`text-sm text-gray-700`}>Any other relevant information can be added here,
                                 such as links to social media profiles, portfolio, etc.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </DashMenuLayout>
@@ -41,4 +47,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default UserProfile;
