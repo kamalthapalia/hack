@@ -19,7 +19,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const fetchData = async () => {
             try {
                 const res = await serverApi.get('/auth');
-                setUser(res.data.data)
+                // set user only if there is none
+                if (!user.userId){
+                    setUser(res.data.data)
+                }
             }
             catch (err) {
                 console.log(err)

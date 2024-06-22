@@ -20,11 +20,12 @@ import About from "./components/About.tsx";
 import ProductPage from "./components/ProductPage.tsx";
 import Auth from './pages/Auth.tsx';
 import News from './pages/News.tsx';
+import Conversation from './components/Conversation.tsx';
 
 function App() {
 
     return (
-        <div className={` mb-4`}>
+        <div className={``}>
             <Routes>
                 <Route path={`/`} element={<General />}>
                     <Route path={`/`} element={<LandingPage />} />
@@ -39,7 +40,9 @@ function App() {
                 <Route path="/dash" element={<Dashboard />}>
                     <Route path={`/dash`} element={<Crops />} />
                     <Route path={`/dash/marketplace`} element={<Marketplace />} />
-                    <Route path={`/dash/chat`} element={<Chat />} />
+                    <Route path={`/dash/chat`} element={<Chat />}>
+                        <Route path={`/dash/chat/:roomerId`} element={<Conversation />} />
+                    </ Route>
                     <Route path={`/dash/animals`} element={<Animals />} />
                     <Route path={`/dash/news`} element={<News />} />
                     <Route path={`/dash/profile/me`} element={<UserProfile />} />

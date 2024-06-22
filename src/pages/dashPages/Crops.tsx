@@ -5,7 +5,7 @@ const Crops = () => {
     return (
         <div>
             <DashMenuLayout title={`Crops`}>
-                <BlogCardGroup />
+                <BlogCardGroup title=""/>
             </DashMenuLayout>
         </div>
     );

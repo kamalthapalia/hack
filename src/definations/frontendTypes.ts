@@ -20,3 +20,8 @@ export type ContextType = {
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
 }
+
+
+export type ChattedUserType = Omit<UserType, "description" | "userId"> & {
+    _id: string
+};

@@ -9,7 +9,7 @@ const MessageInput: React.FC = () => {
 
 
     return (
-        <div className="flex mt-auto absolute bottom-0 w-full mb-6">
+        <div className="flex w-full">
             <input
                 type="text"
                 className="flex-1 p-2 border border-gray-300 rounded-l"

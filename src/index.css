@@ -12,7 +12,37 @@
 		align-items: center;
 	}
 	.cardAnimation {
-		@apply cursor-pointer shadow-[0_15px_40px_-15px_rgba(0,0,0,0.3)] p-4 rounded-md ease-linear duration-150 hover:scale-105
+		@apply cursor-pointer shadow-[0_15px_40px_-15px_rgba(0,0,0,0.3)] p-4 rounded-md ease-linear duration-150 hover:scale-105;
+	}
+
+	/* for scrollbar styling */
+	.scrollbar-thin {
+		scrollbar-width: thin;
+	}
+
+	.scrollbar-thumb-rounded {
+		scrollbar-width: thin;
+		scrollbar-color: #aca8a8 #f1f1f1;
+	}
+
+	.scrollbar {
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 10px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #888;
+			border-radius: 10px;
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
 	}
 }
 
@@ -24,6 +54,12 @@
 
 body {
 	font-family: "Open Sans", sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 /* Profile Input fields */
@@ -107,9 +143,8 @@ body {
 .inputBox > .inputFields {
 	display: flex;
 	flex-direction: column;
-    justify-content: center;
+	justify-content: center;
 	width: 100%;
-	gap: 1rem;
 }
 
 .inputBox > .inputFields > .inputField {
@@ -120,15 +155,16 @@ body {
 
 .inputField input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 .inputField input[type="number"] {
-  -moz-appearance: textfield;
+	-moz-appearance: textfield;
 }
 
-.inputField span {
+.inputField span,
+.inputField p {
 	color: var(--signIn-bg);
 	position: absolute;
 	content: "";
@@ -139,12 +175,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .inputField:focus-within span,
 .inputField.hasContent span {
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	top: -0.75rem;
 	color: var(--signUp-bg);
 }
 .inputField:focus-within input {
 	border-color: var(--primary);
+	background-color: transparent;
 }
 
 /* media field */
@@ -158,5 +195,17 @@ input[type="number"]::-webkit-inner-spin-button {
 	.underlay.signin {
 		transform: translate(0, 0);
 		border-radius: 1.5rem 1.5rem 0 0;
+	}
+
+	.inputField span {
+		font-size: 1rem;
+	}
+	.inputField:focus-within span,
+	.inputField.hasContent span {
+		font-size: 0.9rem;
+	}
+
+	.inputBox > .inputFields input {
+		font-size: 0.85rem;
 	}
 }
