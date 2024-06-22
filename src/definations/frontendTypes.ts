@@ -12,6 +12,7 @@ export type UserType = {
     email: string,
     phoneNumber: number,
     type: string,
+    location: string,
     description?: string
 };
 

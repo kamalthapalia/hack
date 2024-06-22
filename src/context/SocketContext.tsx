@@ -5,7 +5,7 @@ import { SocketContextType, SocketType } from "../definations/socketTypes";
 
 
 export const SocketContext = createContext<SocketContextType>({
-    socket: null,
+    socket: {} as SocketType,
     onlineUsers: []
 });
 

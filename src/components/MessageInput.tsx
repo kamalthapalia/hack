@@ -1,26 +1,39 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
+import { useAuth } from '../context/AuthHook';
+import { useSocket } from '../context/SocketHook';
 
 // interface MessageInputProps {
 //     onSend: (message: string) => void;
 // }
 
-const MessageInput: React.FC = () => {
+const MessageInput = ({roomerId}: {roomerId?: string}) => {
+    const {user} = useAuth();
+    const {socket} = useSocket();
+
     const [message, setMessage] = useState('');
 
+    const handleMessageSend = async () => {
+		if (message) {
+			socket?.emit("sendMessage", {
+				senderId: user.userId,
+				receiverId: roomerId!,
+				message,
+			});
+			// scrollToBottom();
+			setMessage("");
+		}
+	};
 
     return (
         <div className="flex w-full">
             <input
                 type="text"
-                className="flex-1 p-2 border border-gray-300 rounded-l"
+                className="flex-1 p-2 border border-gray-300 rounded-l outline-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type a message..."
             />
-            <button
-
-                className="bg-blue-600 text-white p-2 rounded-r"
-            >
+            <button onClick={handleMessageSend} className="bg-blue-600 text-white p-2 rounded-r" >
                 Send
             </button>
         </div>
