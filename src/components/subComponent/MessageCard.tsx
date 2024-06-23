@@ -1,4 +1,4 @@
-import { useAuth } from "../../context/AuthHook";
+import { useAuth } from "../../hooks/AuthHook";
 import type { serverMessageType } from "../../definations/socketTypes";
 
 const MessageCard = ({ message }: { message: serverMessageType }) => {

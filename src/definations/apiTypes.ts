@@ -45,3 +45,14 @@ export type MarketPlaceType = {
         message: string
     }
 }
+
+
+// blogs type
+export interface BlogType {
+    updatedAt: Date;
+    title: string;
+    body: string;
+    createdBy: string,
+    userId: string;
+    _id: string;
+}

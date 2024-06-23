@@ -1,7 +1,7 @@
 import {BiUser} from "react-icons/bi";
 import {LuWheat} from "react-icons/lu";
 import {Link} from "react-router-dom";
-import { useSocket } from "../context/SocketHook";
+import { useSocket } from "../hooks/SocketHook";
 
 const Navbar = () => {
     const { unseenFromUsers } = useSocket();

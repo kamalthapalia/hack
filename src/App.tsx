@@ -21,6 +21,7 @@ import BlogPage from "./components/BlogPage.tsx";
 import About from "./components/About.tsx";
 import ProductPage from "./components/ProductPage.tsx";
 import Conversation from './components/Conversation.tsx';
+import UpdateBlog from './components/subComponent/UserBlog/UpdateBlog.tsx';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
                     <Route path={`/news`} element={<News />} />
                     <Route path={`/blog/:id`} element={<BlogPage />} />
                     <Route path={`/blog/create`} element={<CreateBlog />} />
+                    <Route path={`/blog/update/:id`} element={<UpdateBlog />} />
                     <Route path={`/prod/:id`} element={<ProductPage />} />
                 </Route>
                 <Route path="/dash" element={<Dashboard />}>

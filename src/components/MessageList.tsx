@@ -5,8 +5,8 @@ import type { serverMessageType } from '../definations/socketTypes';
 import MessageCard from './subComponent/MessageCard';
 
 // context + utils
-import { useSocket } from '../context/SocketHook';
-import { useAuth } from '../context/AuthHook';
+import { useSocket } from '../hooks/SocketHook';
+import { useAuth } from '../hooks/AuthHook';
 import { Queue } from '../utils/ProcessQueue';
 
 

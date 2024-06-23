@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import { useAuth } from '../context/AuthHook';
-import { useSocket } from '../context/SocketHook';
+import { useAuth } from '../hooks/AuthHook';
+import { useSocket } from '../hooks/SocketHook';
 
 const MessageInput = ({roomerId}: {roomerId?: string}) => {
     const {user} = useAuth();

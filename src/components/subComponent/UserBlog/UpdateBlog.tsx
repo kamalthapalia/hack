@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from "react";
-import { useAuth } from "../hooks/AuthHook";
-import { serverApi } from "../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateBlog = () => {
-    const { user } = useAuth();
+import { serverApi } from "../../../utils/axios";
+import { BlogType } from "../../../definations/apiTypes";
+
+const UpdateBlog = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -24,13 +25,29 @@ const CreateBlog = () => {
         e.preventDefault();
 
         try {
-            await serverApi.post(`/blog/${user.userId}`, { ...formData, createdBy: user.username })
+            await serverApi.patch(`/blog/${id}`, formData)
             navigate('/dash/profile/me')
         } catch (error) {
             alert("Error occured")
-            console.log('error')
+            console.log(error)
         }
     }
+
+    useEffect(() => {
+        const fetchBlog = async () => {
+            try {
+                const res = await serverApi.get(`/blog/${id}`);
+                const blogData = res.data.data as BlogType;
+                setFormData({
+                    title: blogData.title,
+                    body: blogData.body
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchBlog();
+    }, [id])
 
     return (
         <form onSubmit={e => handleSubmit(e)} className={`w-full max-w-[600px] container mx-auto my-10`}>
@@ -51,8 +68,8 @@ const CreateBlog = () => {
                         className={`border rounded-md border-cyan-600  focus-within:border-cyan-500 h-[300px] p-2 py-1 outline-none resize-none`}
                         placeholder={`Enter blog content.`}
                         name="body"
-                        maxLength={2000} 
-                         />
+                        maxLength={2000}
+                    />
                 </div>
                 <button type="submit" className={`w-fit bg-blue-500 hover:bg-blue-600 text-white transition rounded px-14 py-2`}>
                     Submit
@@ -62,4 +79,4 @@ const CreateBlog = () => {
     );
 };
 
-export default CreateBlog;
+export default UpdateBlog;

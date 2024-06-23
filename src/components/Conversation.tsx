@@ -8,7 +8,7 @@ import MessageInput from "./MessageInput.tsx";
 // utils + types
 import { serverApi } from "../utils/axios.ts";
 import type { UserType } from "../definations/frontendTypes.ts";
-import { useSocket } from "../context/SocketHook.ts";
+import { useSocket } from "../hooks/SocketHook.ts";
 
 const Conversation = () => {
     const [roomerUser, setRoomerUser] = useState({} as UserType)

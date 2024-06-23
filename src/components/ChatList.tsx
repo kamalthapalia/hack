@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ChatCard from "./ChatCard";
 
 // hooks
-import { useSocket } from "../context/SocketHook";
-import { useAuth } from "../context/AuthHook";
+import { useSocket } from "../hooks/SocketHook";
+import { useAuth } from "../hooks/AuthHook";
 
 //utils
 import { serverApi } from "../utils/axios";

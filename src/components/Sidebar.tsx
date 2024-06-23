@@ -3,8 +3,8 @@ import { BiUser } from "react-icons/bi";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { BsChatText, BsShop } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthHook";
-import { useSocket } from "../context/SocketHook";
+import { useAuth } from "../hooks/AuthHook";
+import { useSocket } from "../hooks/SocketHook";
 
 const Sidebar = () => {
     const { user } = useAuth();

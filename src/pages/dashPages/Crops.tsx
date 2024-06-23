@@ -1,11 +1,11 @@
 import DashMenuLayout from "../../components/DashMenuLayout.tsx";
-import BlogCardGroup from "../../components/subComponent/UserBlog/BlogCardGroup.tsx";
+import NewsCardGroup from "../../components/NewsCardGroup.tsx";
 
 const Crops = () => {
     return (
         <div>
             <DashMenuLayout title={`Crops`}>
-                <BlogCardGroup title=""/>
+                <NewsCardGroup />
             </DashMenuLayout>
         </div>
     );

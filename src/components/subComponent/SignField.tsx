@@ -11,7 +11,7 @@ import Verification from "../Verification";
 // utils & context
 import { serverApi } from "../../utils/axios";
 import { isAxiosError } from "axios";
-import { useAuth } from "../../context/AuthHook";
+import { useAuth } from "../../hooks/AuthHook";
 
 
 

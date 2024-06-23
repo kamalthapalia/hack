@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 import io from "socket.io-client";
-import { useAuth } from "./AuthHook";
+import { useAuth } from "../hooks/AuthHook";
 import { SocketContextType, SocketType, serverMessageType } from "../definations/socketTypes";
 import { ChattedUserType } from "../definations/frontendTypes";
 
