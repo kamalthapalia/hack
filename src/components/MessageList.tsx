@@ -1,15 +1,19 @@
-// components/MessageList.tsx
+import { useEffect, useRef, useState } from 'react';
 import type { serverMessageType } from '../definations/socketTypes';
-import { useEffect, useState } from 'react';
+
+// components
+import MessageCard from './subComponent/MessageCard';
+
+// context + utils
 import { useSocket } from '../context/SocketHook';
 import { useAuth } from '../context/AuthHook';
 import { Queue } from '../utils/ProcessQueue';
-import MessageCard from './subComponent/MessageCard';
 
 
 const MessageList = ({ roomerId }: { roomerId?: string }) => {
     const { socket } = useSocket();
     const { user } = useAuth();
+    const messageEndRef = useRef<HTMLDivElement>(null); // for scrolling
 
     const [previousMessages, setPreviousMessages] = useState([] as serverMessageType[]);
     const [stateUpdateQueue] = useState(new Queue<serverMessageType>())
@@ -49,7 +53,6 @@ const MessageList = ({ roomerId }: { roomerId?: string }) => {
             ) {
                 setPreviousMessages(updatedMessages);
             }
-            // scrollToBottom();
         };
 
         const interval = setInterval(processQueue, 150); // Process queue every 150ms
@@ -66,12 +69,11 @@ const MessageList = ({ roomerId }: { roomerId?: string }) => {
 
 
     useEffect(() => {
-        console.log(user.userId, roomerId)
+        // console.log(user.userId, roomerId)
         socket?.emit("getConversationMessages", { viewer: user.userId, roomer: roomerId! });
 
         socket?.on("receiveConversation", (messages) => {
             setPreviousMessages(messages);
-            // scrollToBottom();
         });
         socket?.on("messageSeen", (messageId) => {
             setPreviousMessages((prevMsg) => {
@@ -83,17 +85,24 @@ const MessageList = ({ roomerId }: { roomerId?: string }) => {
                 });
                 return updatedMessages;
             });
-            // scrollToBottom();
         });
 
         return () => { socket?.off(); }
     }, [roomerId, socket, user.userId]);
 
+    // when new message
+    useEffect(()=> {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth"})
+    }, [previousMessages])
+
     return (
-        <div className="h-full flex flex-col justify-end gap-3 overflow-y-auto">
-            {previousMessages.map(prevMessage => (
-                <MessageCard key={prevMessage._id} message={prevMessage} />
-            ))}
+        <div className=' overflow-y-scroll py-2'>
+            <div className="flex flex-col justify-end gap-3">
+                {previousMessages.map(prevMessage => (
+                    <MessageCard key={prevMessage._id} message={prevMessage} />
+                ))}
+                <div ref={messageEndRef}></div>
+            </div>
         </div>
     );
 };

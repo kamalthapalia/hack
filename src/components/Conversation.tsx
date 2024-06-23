@@ -8,22 +8,32 @@ import MessageInput from "./MessageInput.tsx";
 // utils + types
 import { serverApi } from "../utils/axios.ts";
 import type { UserType } from "../definations/frontendTypes.ts";
+import { useSocket } from "../context/SocketHook.ts";
 
 const Conversation = () => {
     const [roomerUser, setRoomerUser] = useState({} as UserType)
     const { roomerId } = useParams();
+
+    const {unseenFromUsers, setUnseenFromUsers} = useSocket();
 
     // get opposing user info
     useEffect(() => {
         const fetchUserData = async () => {
             const user = await serverApi.get(`/users/${roomerId}`);
             setRoomerUser(user.data.data)
+
+            // remove seen users
+            if (unseenFromUsers.includes(roomerId!)){
+                setUnseenFromUsers(unseenUserList => {
+                    return unseenUserList.filter(item => item != roomerId);
+                })
+            }
         }
         fetchUserData()
     }, [roomerId])
 
     return (
-        <div className={`h-full relative flex flex-col gap-2 bg-white px-2 sm:px-4`}>
+        <div className={`grid grid-rows-[5rem,1fr] flex-grow max-w-[1000px]`}>
             <div className={` flex justify-between items-center p-2 border-b`}>
                 <span className={`font-semibold text-md`}>{roomerUser.username || "Niggendra Bahadur"}</span>
                 <div className="text-center">
@@ -31,7 +41,7 @@ const Conversation = () => {
                     <p className={`text-sm font-semibold text-gray-600`}>{roomerUser.email}</p>
                 </div>
             </div>
-            <div className={` relative h-full w-full flex flex-col gap-4 py-2 justify-end`}>
+            <div className={`max-h-[90vh] h-full flex flex-col gap-2 py-2 justify-end`}>
                 <MessageList roomerId={roomerId} />
                 <MessageInput roomerId={roomerId} />
             </div>

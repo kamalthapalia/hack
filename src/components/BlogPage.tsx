@@ -55,7 +55,7 @@ const BlogPage = () => {
                 </p>
             </div>
             <div>
-                <BlogCardGroup />
+                <BlogCardGroup title="" />
             </div>
         </div>
     );

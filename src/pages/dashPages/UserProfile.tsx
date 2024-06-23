@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthHook.ts";
 
 const UserProfile = () => {
     const {user} = useAuth();
-    console.log(user)
+    // console.log(user)
 
     return (
         <div>

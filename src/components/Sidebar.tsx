@@ -4,9 +4,11 @@ import { IoNewspaperOutline } from "react-icons/io5";
 import { BsChatText, BsShop } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthHook";
+import { useSocket } from "../context/SocketHook";
 
 const Sidebar = () => {
     const { user } = useAuth();
+    const { unseenFromUsers } = useSocket();
 
     return (
         <div className="w-[240px]">
@@ -46,7 +48,11 @@ const Sidebar = () => {
                             <Link to={`chat`}>
                                 <div
                                     className={`flex gap-2 items-center p-2.5 hover:bg-gray-500/40 transition cursor-pointer rounded`}>
-                                    <BsChatText size={`1.35em`} />
+                                    <div className="relative">
+                                        <BsChatText size={`1.35em`} />
+                                        {unseenFromUsers.length > 0 && <span className="absolute h-3 w-3 left-2 -bottom-1 rounded-full bg-rose-400"></span>}
+
+                                    </div>
                                     <p className={`font-medium`}>Chat</p>
                                 </div>
                             </Link>

@@ -2,10 +2,6 @@ import {useState} from 'react';
 import { useAuth } from '../context/AuthHook';
 import { useSocket } from '../context/SocketHook';
 
-// interface MessageInputProps {
-//     onSend: (message: string) => void;
-// }
-
 const MessageInput = ({roomerId}: {roomerId?: string}) => {
     const {user} = useAuth();
     const {socket} = useSocket();
@@ -19,7 +15,6 @@ const MessageInput = ({roomerId}: {roomerId?: string}) => {
 				receiverId: roomerId!,
 				message,
 			});
-			// scrollToBottom();
 			setMessage("");
 		}
 	};

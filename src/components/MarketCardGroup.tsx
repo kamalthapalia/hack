@@ -20,7 +20,7 @@ const MarketCardGroup = () => {
 
             try {
                 const res: MarketPlaceType = await serverApi.get('/marketplace');
-                console.log(res.data)
+                // console.log(res.data)
                 setMarketPosts(res.data.data)
             }
             catch (error) {

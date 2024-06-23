@@ -9,12 +9,11 @@ import { SiImessage } from "react-icons/si";
 
 const OthersProfile = () => {
     const { userId } = useParams();
-    // console.log(userId)
 
     useEffect(() => {
         const fetchUserInfo = async () => {
             const user = await serverApi.get(`/users/${userId}`)
-            console.log(user.data.data as UserType)
+            // console.log(user.data.data)
             setUser(user.data.data as UserType)
         }
         fetchUserInfo();

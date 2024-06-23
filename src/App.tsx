@@ -8,18 +8,18 @@ import Animals from "./pages/dashPages/Animals.tsx";
 import Crops from "./pages/dashPages/Crops.tsx";
 import UserProfile from "./pages/dashPages/UserProfile.tsx";
 import OthersProfile from './pages/dashPages/OthersProfile.tsx';
-import General from "./components/General.tsx";
-import LandingPage from "./components/LandingPage.tsx";
 import Marketplace from "./pages/Marketplace.tsx";
 import Blogs from "./pages/Blogs.tsx";
-
-// components 
-import BlogPage from "./components/BlogPage.tsx";
 import CreateBlog from "./pages/CreateBlog.tsx";
-import About from "./components/About.tsx";
-import ProductPage from "./components/ProductPage.tsx";
 import Auth from './pages/Auth.tsx';
 import News from './pages/News.tsx';
+
+// components 
+import General from "./components/General.tsx";
+import LandingPage from "./components/LandingPage.tsx";
+import BlogPage from "./components/BlogPage.tsx";
+import About from "./components/About.tsx";
+import ProductPage from "./components/ProductPage.tsx";
 import Conversation from './components/Conversation.tsx';
 
 function App() {

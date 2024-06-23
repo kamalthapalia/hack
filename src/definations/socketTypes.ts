@@ -14,7 +14,6 @@ export type serverMessageType = {
 // Define the type for your server's events
 export interface ServerToClientEvents {
 	onlineUser: (users: string[]) => void;
-    // TODO: TYPING properly
     newConversationStart: (userData: ChattedUserType) => void;
 
     receiveMessage: (saveMessage : serverMessageType) => void;
@@ -38,4 +37,6 @@ export type SocketType = Socket<
 export interface SocketContextType {
 	socket: SocketType;
 	onlineUsers: string[];
+	unseenFromUsers: string[];
+    setUnseenFromUsers: React.Dispatch<React.SetStateAction<string[]>>
 }
