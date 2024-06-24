@@ -18,14 +18,15 @@ const BlogPage = () => {
                 const res = await serverApi.get(`/blog/${id}`);
                 setBlog(res.data.data as BlogType)
 
-                const sameFromUserRes = await serverApi.get(`/blog/user/${blog.userId}`);
+                const sameFromUserRes = await serverApi.get(`/blog/user-related/${res.data.data.userId}`);
+                // TODO: Same blog twice issue
                 setUserBlogs(sameFromUserRes.data.data as BlogType[])
             } catch (error) {
                 console.log(error)
             }
         }
         getSingleBlogAndOthers();
-    }, [])
+    }, [id])
 
     return (
         <div className="max-w-[1000px] w-full container flex flex-col gap-16 mx-auto my-10 px-2 sm:px-8">

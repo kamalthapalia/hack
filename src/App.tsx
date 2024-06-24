@@ -10,9 +10,10 @@ import UserProfile from "./pages/dashPages/UserProfile.tsx";
 import OthersProfile from './pages/dashPages/OthersProfile.tsx';
 import Marketplace from "./pages/Marketplace.tsx";
 import Blogs from "./pages/Blogs.tsx";
-import CreateBlog from "./pages/CreateBlog.tsx";
 import Auth from './pages/Auth.tsx';
 import News from './pages/News.tsx';
+import UserBlog from './pages/dashPages/UserBlog.tsx';
+import UserMarketPlaceProduct from './pages/dashPages/UserMarketPlaceProduct.tsx';
 
 // components 
 import General from "./components/General.tsx";
@@ -21,7 +22,10 @@ import BlogPage from "./components/BlogPage.tsx";
 import About from "./components/About.tsx";
 import ProductPage from "./components/ProductPage.tsx";
 import Conversation from './components/Conversation.tsx';
+import CreateBlog from "./components/subComponent/UserBlog/CreateBlog.tsx";
 import UpdateBlog from './components/subComponent/UserBlog/UpdateBlog.tsx';
+import CreateProduct from './components/subComponent/UserProduct/CreateProduct.tsx';
+import UpdateProduct from './components/subComponent/UserProduct/UpdateProduct.tsx';
 
 function App() {
 
@@ -35,9 +39,13 @@ function App() {
                     <Route path={`/about`} element={<About />} />
                     <Route path={`/news`} element={<News />} />
                     <Route path={`/blog/:id`} element={<BlogPage />} />
+                    {/* TODO: make model instead of link */}
                     <Route path={`/blog/create`} element={<CreateBlog />} />
                     <Route path={`/blog/update/:id`} element={<UpdateBlog />} />
-                    <Route path={`/prod/:id`} element={<ProductPage />} />
+                    <Route path={`/product/create`} element={<CreateProduct />} />
+                    <Route path={`/product/update/:id`} element={<UpdateProduct />} />
+                    {/* END */}
+                    <Route path={`/product/:itemId`} element={<ProductPage />} />
                 </Route>
                 <Route path="/dash" element={<Dashboard />}>
                     <Route path={`/dash`} element={<Crops />} />
@@ -47,7 +55,10 @@ function App() {
                     </ Route>
                     <Route path={`/dash/animals`} element={<Animals />} />
                     <Route path={`/dash/news`} element={<News />} />
-                    <Route path={`/dash/profile/me`} element={<UserProfile />} />
+                    <Route path={`/dash/profile/me`} element={<UserProfile />}>
+                        <Route path={'/dash/profile/me/blogs'} element={<UserBlog />} />
+                        <Route path={'/dash/profile/me/products'} element={<UserMarketPlaceProduct />} />
+                    </Route>
                     <Route path={`/dash/profile/:userId`} element={<OthersProfile />} />
                 </Route>
                 <Route path={'/auth'} element={<Auth />} />

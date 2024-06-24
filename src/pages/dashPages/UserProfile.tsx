@@ -1,27 +1,12 @@
-import { useEffect, useState } from "react";
 import DashMenuLayout from "../../components/DashMenuLayout.tsx";
 import { useAuth } from "../../hooks/AuthHook.ts";
-import BlogCardGroup from "../../components/subComponent/UserBlog/BlogCardGroup.tsx";
-import { serverApi } from "../../utils/axios.ts";
-import { BlogType } from "../../definations/apiTypes.ts";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const UserProfile = () => {
     const { user } = useAuth();
-    const [userBlogs, setUserBlogs] = useState<BlogType[]>([]);
-
-    useEffect(() => {
-        if (user.userId) {
-            const fetchUserBlogs = async () => {
-                const res = await serverApi.get(`/blog/user/${user.userId}`);
-                setUserBlogs(res.data.data as BlogType[])
-            }
-            fetchUserBlogs()
-        }
-    }, [user])
 
     return (
-        <div>
+        <div className="flex flex-col gap-6">
             <DashMenuLayout title={`Profile`}>
                 <div className={`flex flex-col items-start bg-gray-100 p-6 rounded-lg shadow-md`}>
                     <div className="w-full flex justify-between items-center">
@@ -39,10 +24,16 @@ const UserProfile = () => {
                             </div>
                         </div>
 
-                        <Link to={'/blog/create'}
-                            className={`bg-blue-500 text-white w-fit font-bold py-1 px-10 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300`}>
-                            Create Blog
-                        </Link>
+                        <div className="center-child | flex-col gap-2">
+                            <Link to={'/blog/create'}
+                                className={`bg-blue-500 text-white w-fit font-bold py-1 px-10 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300`}>
+                                Create Blog
+                            </Link>
+                            <Link to={'/product/create'}
+                                className={`bg-blue-500 text-white w-fit font-bold py-1 px-10 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300`}>
+                                Create Product
+                            </Link>
+                        </div>
                     </div>
                     <div className={`flex flex-col gap-2 w-full`}>
                         <div className={`bg-white p-4 rounded-lg shadow-inner`}>
@@ -66,7 +57,23 @@ const UserProfile = () => {
                 </div>
             </DashMenuLayout>
 
-            <BlogCardGroup blogsArray={userBlogs} title={`${user.username}'s blogs`} />
+            <div className=" px-8 sm:px-16 ">
+                <div className="navigation | flex text-white bg-slate-700 rounded-sm mb-4">
+                    <NavLink
+                        to="/dash/profile/me/blogs"
+                        className={({ isActive }) => (isActive ? 'bg-blue-400 px-4' : 'px-4 bg-none')}
+                    >
+                        Blogs
+                    </NavLink>
+                    <NavLink
+                        to="/dash/profile/me/products"
+                        className={({ isActive }) => (isActive ? 'bg-blue-400 px-4' : 'px-4 bg-none')}
+                    >
+                        Products
+                    </NavLink>
+                </div>
+                <Outlet />
+            </div>
         </div>
     );
 };

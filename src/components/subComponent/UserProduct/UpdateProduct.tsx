@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { serverApi } from "../../../utils/axios";
 import { BlogType } from "../../../definations/apiTypes";
 
-const UpdateBlog = () => {
+const UpdateProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const UpdateBlog = () => {
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const res = await serverApi.get(`/blog/user/${id}`);
+                const res = await serverApi.get(`/blog/${id}`);
                 const blogData = res.data.data as BlogType;
                 setFormData({
                     title: blogData.title,
@@ -44,7 +44,6 @@ const UpdateBlog = () => {
                 })
             } catch (error) {
                 console.log(error)
-                alert('TERO POST HOINA YO. MUG')
             }
         }
         fetchBlog();
@@ -80,4 +79,4 @@ const UpdateBlog = () => {
     );
 };
 
-export default UpdateBlog;
+export default UpdateProduct;

@@ -1,10 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import { useAuth } from "../hooks/AuthHook";
-import { serverApi } from "../utils/axios";
+import { serverApi } from "../../../utils/axios";
 import { useNavigate } from "react-router-dom";
 
 const CreateBlog = () => {
-    const { user } = useAuth();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -24,8 +22,8 @@ const CreateBlog = () => {
         e.preventDefault();
 
         try {
-            await serverApi.post(`/blog/${user.userId}`, { ...formData, createdBy: user.username })
-            navigate('/dash/profile/me')
+            await serverApi.post(`/blog`, { ...formData })
+            navigate('/dash/profile/me/blogs')
         } catch (error) {
             alert("Error occured")
             console.log('error')
@@ -51,8 +49,8 @@ const CreateBlog = () => {
                         className={`border rounded-md border-cyan-600  focus-within:border-cyan-500 h-[300px] p-2 py-1 outline-none resize-none`}
                         placeholder={`Enter blog content.`}
                         name="body"
-                        maxLength={2000} 
-                         />
+                        maxLength={2000}
+                    />
                 </div>
                 <button type="submit" className={`w-fit bg-blue-500 hover:bg-blue-600 text-white transition rounded px-14 py-2`}>
                     Submit

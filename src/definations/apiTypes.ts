@@ -20,8 +20,8 @@ export type NewsApiType = {
 
 
 // MARKETPLACE
-export interface PostApiType {
-    date: Date;
+export interface MarketPlacePostApiType {
+    updatedAt: Date;
     details: string;
     itemName: string;
     location: string;
@@ -32,7 +32,8 @@ export interface PostApiType {
         _id: string
     },
     price: number;
-    type: string;
+    itemType: "animal"| "product" | "tool" | "machinery";
+    type: 'sale' | 'rent';
     userId: string;
     __v: number;
     _id: string;
@@ -41,7 +42,7 @@ export interface PostApiType {
 
 export type MarketPlaceType = {
     data: {
-        data: PostApiType[],
+        data: MarketPlacePostApiType[],
         message: string
     }
 }

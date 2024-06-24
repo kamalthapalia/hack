@@ -3,16 +3,17 @@ import { GiGoat } from "react-icons/gi";
 import { AiOutlineClockCircle, AiOutlineDollar } from "react-icons/ai";
 import { LuMapPin } from "react-icons/lu";
 // types
-import { PostApiType } from "../definations/apiTypes";
+import { MarketPlacePostApiType } from "../definations/apiTypes";
 // utils
 import { timeParser } from "../utils/timeParser";
 import { commaSeprator } from "../utils/commaSeparator";
 import { Link } from "react-router-dom";
 
-const MarketCard = ({ postDetails }: { postDetails: PostApiType }) => {
+const MarketCard = ({ postDetails }: { postDetails: MarketPlacePostApiType }) => {
+    console.log(postDetails)
 
     return (
-        <div className={`cardAnimation | flex flex-col gap-4`}>
+        <Link to={`/product/${postDetails._id}`} className={`cardAnimation | flex flex-col gap-4`}>
             <img
                 className={`h-[400px] w-full object-cover rounded-md`}
                 // src={`${postDetails.}`}
@@ -21,8 +22,9 @@ const MarketCard = ({ postDetails }: { postDetails: PostApiType }) => {
             <div>
 
                 <div className={`flex items-center justify-between pb-1`}>
-                        <Link to={`/dash/profile/${postDetails.userId}`} className=" text-blue-700 font-semibold">By: {postDetails.postedBy ?? "hari krishnea"}</Link>
-                        <span className={`font-semibold py-1 px-4 rounded-t-2xl rounded-b-xl ${postDetails.type == 'sale' ? "bg-rose-200" : "bg-cyan-200"}`}>{postDetails.type}</span>
+                    {/* <Link to={`/dash/profile/${postDetails.userId}`} className=" text-blue-700 font-semibold">By: {postDetails.postedBy || "anonymous" }</Link> */}
+                    <p className=" text-cyan-700 font-semibold">By: {postDetails.postedBy || "anonymous" }</p>
+                    <span className={`font-semibold py-1 px-4 rounded-t-2xl rounded-b-xl ${postDetails.type == 'sale' ? "bg-rose-200" : "bg-cyan-200"}`}>{postDetails.type}</span>
                 </div>
 
                 <div className={`flex items-center justify-between gap-2`}>
@@ -39,7 +41,8 @@ const MarketCard = ({ postDetails }: { postDetails: PostApiType }) => {
                 <div className={`flex flex-col gap-0.5`}>
                     <div className={`flex items-center gap-2`}>
                         <AiOutlineClockCircle size={`0.8em`} className={`w-5 justify-start`} />
-                        <p className={`font-bold text-gray-900 text-xs`}>{timeParser(postDetails.date)}</p>
+                        {/* TODO: remove postDetails.date in production  */}
+                        <p className={`font-bold text-gray-900 text-xs`}>{timeParser(postDetails.updatedAt || postDetails.date)}</p>
                     </div>
                     <div className={`flex items-center gap-2`}>
                         <LuMapPin size={`0.8em`} className={`w-5 justify-start`} />
@@ -47,7 +50,7 @@ const MarketCard = ({ postDetails }: { postDetails: PostApiType }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
