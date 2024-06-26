@@ -1,11 +1,13 @@
 const BlogCard = () => {
     return (
-        <div className={`cursor-pointer`}>
-            <img
-                className={`h-[250px] w-full object-cover`}
-                src="https://images.pexels.com/photos/1509607/pexels-photo-1509607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""/>
+        <div className={`cursor-pointer shadow-slate-200`}>
             <div className={`flex flex-col gap-1.5`}>
+                <img
+                    className="w-full h-[750px] object-cover"
+                    src="https://images.pexels.com/photos/1509607/pexels-photo-1509607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    alt="Blog cover"
+                />
+                
                 <div className={`flex justify-between items-center text-sm mt-2 font-semibold text-gray-700`}>
                     <p>Raja Hero</p>
                     <p>1 min ago</p>

@@ -1,63 +1,27 @@
-import { useEffect, useState } from "react";
+// components
 import MarketCard from "./MarketCard.tsx";
-import { serverApi } from "../utils/axios.ts";
-import { isAxiosError } from "axios";
+import CardSkeleton from "./subComponent/CardSkeleton.tsx";
 
+// types
+import type { MarketPlacePostApiType } from "../definations/apiTypes.ts";
 
-export interface PostType {
-    date: Date;
-    details: string;
-    itemName: string;
-    location: string;
-    pictureUrl: {
-        path: string,
-        name: string,
-        _id: string
-    },
-    price: number;
-    type: string;
-    userId: string;
-    __v: number;
-    _id: string;
-}
-
-type MarketPlaceType = {
-    data: {
-        data: PostType[],
-        message: string
-    }
-}
-
-
-const MarketCardGroup = () => {
-    const [marketPosts, setMarketPosts] = useState([] as PostType[]);
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const res: MarketPlaceType = await serverApi.get('/marketplace');
-                console.log(res.data)
-                setMarketPosts(res.data.data)
-            }
-            catch (error) {
-                if (isAxiosError(error)) {
-                    setError('An unexpected error occured');
-                } else {
-                    setError('An unexpected error occurred');
-                }
-            }
-        }
-        fetchData();
-    }, [])
+const MarketCardGroup = ({ marketPosts, error, loading, title }: { marketPosts: MarketPlacePostApiType[], error: string, loading: boolean, title: string }) => {
 
     return (
-        <div className={` container mx-auto`}>
-            <p className={`font-semibold my-10 text-lg`}>Recently added</p>
-            <div className={`grid grid-cols-4 gap-8`}>
-                {marketPosts.map(postDetails => (
-                    <MarketCard key={postDetails._id} postDetails={postDetails} />
-                ))}
+        <div className={` container mx-auto px-4`}>
+            <p className={`font-semibold mb-6 text-lg`}>{title}</p>
+            <div className={`grid xs:grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4 px-4`}>
+                {loading ? (
+                    <div className="flex justify-center items-center h-64 w-full max-w-[600px]">
+                        <CardSkeleton />
+                    </div>
+                ) : (
+                    <>
+                        {marketPosts.map(postDetails => (
+                            <MarketCard key={postDetails._id} postDetails={postDetails} />
+                        ))}
+                    </>
+                )}
                 <span className=" text-rose-500 text-lg">{error}</span>
             </div>
         </div>

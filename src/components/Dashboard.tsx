@@ -3,7 +3,7 @@ import {Outlet} from "react-router-dom";
 
 const Dashboard = () => {
     return (
-        <div className={`flex h-screen`}>
+        <div className={`flex h-screen gap-0`}>
             <div>
                 <Sidebar/>
             </div>

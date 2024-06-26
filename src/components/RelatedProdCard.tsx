@@ -1,8 +1,12 @@
 import {AiOutlineClockCircle, AiOutlineDollar} from "react-icons/ai";
 import {LuMapPin} from "react-icons/lu";
 import {GiGoat} from "react-icons/gi";
+import { MarketPlacePostApiType } from "../definations/apiTypes";
+import { timeParser } from "../utils/timeParser";
+import { commaSeprator } from "../utils/commaSeparator";
+import { Link } from "react-router-dom";
 
-const RelatedProdCard = () => {
+const RelatedProdCard = ({product}: {product: MarketPlacePostApiType}) => {
     return (
         <div className={`flex cursor-pointer`}>
             <img
@@ -13,25 +17,25 @@ const RelatedProdCard = () => {
                 <div className={`flex flex-col gap-1.5`}>
                     <div className={`flex items-center gap-2`}>
                         <GiGoat className={`w-5 h-5`}/>
-                        <p className={`font-semibold`}>Mountain Goat</p>
+                        <p className={`font-semibold`}>{product.itemName}</p>
                     </div>
                     <div className={`flex items-center gap-2`}>
                         <AiOutlineDollar className={`w-5 h-5`}/>
-                        <p className={`text-primary font-bold`}> रु-50,000</p>
+                        <p className={`text-primary font-bold`}> रु-{commaSeprator(product.price)}</p>
                     </div>
                     <div className={`flex flex-col gap-0.5`}>
                         <div className={`flex items-center gap-2`}>
                             <AiOutlineClockCircle size={`0.8em`} className={`w-5 h-5`}/>
-                            <p className={`font-bold text-gray-900 text-xs`}>a day ago</p>
+                            <p className={`font-bold text-gray-900 text-xs`}>{timeParser(product.updatedAt)}</p>
                         </div>
                         <div className={`flex items-center gap-2`}>
                             <LuMapPin size={`0.8em`} className={`w-5 h-5`}/>
-                            <p className={`font-bold text-gray-900 text-xs`}>Kathmandu</p>
+                            <p className={`font-bold text-gray-900 text-xs`}>{product.location}</p>
                         </div>
                     </div>
                 </div>
-                <p className={`border hover:bg-gray-100 text-sm font-medium text-gray-700 transition border-gray-500 w-fit px-4 rounded-full`}>See
-                    product</p>
+                <Link to={`/product/${product._id}`} className={`bg-blue-400 hover:bg-blue-500 text-white outline-none text-sm font-medium transition border-gray-500 w-fit px-4 py-1 rounded-sm`}>See
+                    product</Link>
             </div>
         </div>
     );

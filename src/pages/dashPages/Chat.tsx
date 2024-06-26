@@ -1,19 +1,13 @@
-import DashMenuLayout from "../../components/DashMenuLayout.tsx";
+import { Outlet } from "react-router-dom";
 import ChatList from "../../components/ChatList.tsx";
-import Conversation from "../../components/Conversation.tsx";
 
 const Chat = () => {
     return (
-        <div className="flex flex-col h-screen">
-            <DashMenuLayout title="Chat">
-                <div className="flex gap-10 h-full">
-                    <ChatList/>
-                    <div className={`flex-grow max-w-[1000px] min-h-full`}>
-                        {/*<ExpertList/>*/}
-                        <Conversation/>
-                    </div>
-                </div>
-            </DashMenuLayout>
+        <div className="max-h-screen h-full flex gap-x-4 mx-6">
+            <ChatList />
+            {/* <div className={`flex-grow max-w-[1000px]`}> */}
+                <Outlet />
+            {/* </div> */}
         </div>
     );
 };

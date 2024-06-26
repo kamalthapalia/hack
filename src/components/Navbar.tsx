@@ -1,10 +1,11 @@
 import {BiUser} from "react-icons/bi";
 import {LuWheat} from "react-icons/lu";
 import {Link} from "react-router-dom";
+import { useSocket } from "../hooks/SocketHook";
 
 const Navbar = () => {
-
-
+    const { unseenFromUsers } = useSocket();
+    
     return (
         <div
             className={`col-span-2 sticky top-0 border-b  w-full z-5 py-4 px-14 z-[99999] bg-white transition-all`}>
@@ -34,8 +35,9 @@ const Navbar = () => {
                 <div>
                     <Link to={`/dash`}>
                         <div
-                            className={`flex items-center font-medium rounded-full p-2 gap-1 bg-gray-200 cursor-pointer px-2`}>
-                            <BiUser className={``} size={`1.2em`}/>
+                            className={`relative flex items-center font-medium rounded-full p-2 gap-1 bg-gray-200 cursor-pointer px-2`}>
+                            <BiUser size={`1.2em`}/>
+                            {unseenFromUsers.length > 0 && <span className="absolute h-3 w-3 left-1 bottom-0 rounded-full bg-rose-400"></span>}
                         </div>
                     </Link>
                 </div>
