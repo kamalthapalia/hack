@@ -3,16 +3,18 @@ import { serverApi } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
 // types
-import type{ UserType, ContextType } from "../definations/frontendTypes";
+import type { UserType, ContextType } from "../definations/frontendTypes";
 
 export const AuthContext = createContext<ContextType>({
     user: {} as UserType,
     login: async () => { },
-    logout: () => { }
+    logout: () => { },
+    isAuthChecked: false
 })
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserType>({} as UserType);
+    const [isAuthChecked, setIsAuthChecked] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,7 +22,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             try {
                 const res = await serverApi.get('/auth');
                 // set user only if there is none
-                if (!user.userId){
+                if (!user.userId) {
                     setUser(res.data.data)
                 }
             }
@@ -28,6 +30,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 console.log(err)
                 setUser({} as UserType)
                 navigate("/auth")
+            } finally {
+                setIsAuthChecked(true)
             }
         }
         fetchData();
@@ -42,13 +46,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
     const logout = async () => {
-        await serverApi.get("/auth/logout");
-        setUser({} as UserType);
-        navigate("/auth");
+        try {
+            await serverApi.get("/auth/logout");
+            setUser({} as UserType);
+            navigate("/auth");
+        } catch (error) {
+            console.log(error)    
+        }
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, isAuthChecked }}>
             {children}
         </AuthContext.Provider>
     )

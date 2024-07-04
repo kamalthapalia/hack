@@ -7,7 +7,7 @@ import { serverApi } from "../utils/axios.ts";
 import { timeParser } from "../utils/timeParser.ts";
 import BlogCard from "./subComponent/UserBlog/BlogCard.tsx";
 
-const BlogPage = () => {
+const BlogPage = ({isOnHome}: {isOnHome: boolean}) => {
     const { id } = useParams();
     const [blog, setBlog] = useState<BlogType>({} as BlogType);
     const [userBlogs, setUserBlogs] = useState<BlogType[]>([]);
@@ -60,7 +60,7 @@ const BlogPage = () => {
                 <h1 className=" text-xl font-semibold">Others from the user :</h1>
                 <div className={`grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 ms-3`}>
                     {userBlogs.map(blog => (
-                        <BlogCard key={blog._id} blog={blog} />
+                        <BlogCard key={blog._id} isOnHome={isOnHome} blog={blog} />
                     ))
                     }
                 </div>

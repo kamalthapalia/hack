@@ -74,8 +74,6 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
             ...prevState,
             [name]: value
         }));
-
-        console.log(formData)
     };
 
 

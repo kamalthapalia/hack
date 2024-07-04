@@ -5,9 +5,10 @@ import { BsChatText, BsShop } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/AuthHook";
 import { useSocket } from "../hooks/SocketHook";
+import { LogOutLogo } from "./svgs/FontAwesomeIcons";
 
 const Sidebar = () => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const { unseenFromUsers } = useSocket();
 
     return (
@@ -77,6 +78,14 @@ const Sidebar = () => {
                                 <div className={`font-medium text-gray-300 text-sm`}>
                                     <p>{user.username}</p>
                                     <p className={`text-xs text-gray-400 font-semibold`}>{user.phoneNumber}</p>
+                                </div>
+                            </div>
+                            <div
+                                onClick={logout}
+                                className={`flex gap-3 items-center border-t border-rose-500/40 pt-2 hover:border-rose-500/40 hover:border bg-rose-400 text-white transition cursor-pointer rounded p-2.5`}>
+                                <LogOutLogo/>
+                                <div className={`font-medium text-sm`}>
+                                    <p>Logout</p>
                                 </div>
                             </div>
                         </Link>

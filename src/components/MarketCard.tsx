@@ -10,7 +10,6 @@ import { commaSeprator } from "../utils/commaSeparator";
 import { Link } from "react-router-dom";
 
 const MarketCard = ({ postDetails }: { postDetails: MarketPlacePostApiType }) => {
-    console.log(postDetails)
 
     return (
         <Link to={`/product/${postDetails._id}`} className={`cardAnimation | flex flex-col gap-4`}>
@@ -41,8 +40,7 @@ const MarketCard = ({ postDetails }: { postDetails: MarketPlacePostApiType }) =>
                 <div className={`flex flex-col gap-0.5`}>
                     <div className={`flex items-center gap-2`}>
                         <AiOutlineClockCircle size={`0.8em`} className={`w-5 justify-start`} />
-                        {/* TODO: remove postDetails.date in production  */}
-                        <p className={`font-bold text-gray-900 text-xs`}>{timeParser(postDetails.updatedAt || postDetails.date)}</p>
+                        <p className={`font-bold text-gray-900 text-xs`}>{timeParser(postDetails.updatedAt)}</p>
                     </div>
                     <div className={`flex items-center gap-2`}>
                         <LuMapPin size={`0.8em`} className={`w-5 justify-start`} />

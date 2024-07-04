@@ -1,11 +1,11 @@
 import BlogCardGroup from "../components/subComponent/UserBlog/BlogCardGroup.tsx";
 
-const Blogs = () => {
+const Blogs = ({isOnHome} : {isOnHome:boolean}) => {
     
 
     return (
         <div>
-            <BlogCardGroup blogsArray={[]} title="" />
+            <BlogCardGroup isOnHome={isOnHome} blogsArray={[]} title="" />
         </div>
     );
 };

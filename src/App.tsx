@@ -35,10 +35,10 @@ function App() {
                 <Route path={`/`} element={<General />}>
                     <Route path={`/`} element={<LandingPage />} />
                     <Route path={`/market`} element={<Marketplace />} />
-                    <Route path={`/blogs`} element={<Blogs />} />
+                    <Route path={`/blogs`} element={<Blogs isOnHome={false} />} />
                     <Route path={`/about`} element={<About />} />
                     <Route path={`/news`} element={<News />} />
-                    <Route path={`/blog/:id`} element={<BlogPage />} />
+                    <Route path={`/blog/:id`} element={<BlogPage isOnHome={false} />} />
                     {/* TODO: make model instead of link */}
                     <Route path={`/blog/create`} element={<CreateBlog />} />
                     <Route path={`/blog/update/:id`} element={<UpdateBlog />} />

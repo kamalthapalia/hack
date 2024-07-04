@@ -20,6 +20,7 @@ export type ContextType = {
     user: UserType,
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
+    isAuthChecked: boolean
 }
 
 

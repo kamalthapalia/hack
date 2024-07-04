@@ -28,12 +28,6 @@ const RelatedProductCardGroup = ({itemType}: {itemType: "animal" | "product" | "
                     <RelatedProdCard product={product}/>
                 ))
             }
-
-            {/* <RelatedProdCard/>
-            <RelatedProdCard/>
-            <RelatedProdCard/>
-            <RelatedProdCard/>
-            <RelatedProdCard/> */}
         </div>
     );
 };
