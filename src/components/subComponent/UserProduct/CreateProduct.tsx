@@ -1,11 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { serverApi } from "../../../utils/axios";
 import { useNavigate } from "react-router-dom";
+import { MarketPlacePostApiType } from "../../../definations/apiTypes";
 
 const CreateProduct = () => {
     const navigate = useNavigate();
-
-    // TODO: Image for product
+    
+    const [productImg, setProductImg] = useState<File>();
     const [formData, setFormData] = useState({
         itemName: '',
         price: 0,
@@ -24,15 +25,35 @@ const CreateProduct = () => {
         }));
     }
 
+    const handleProductImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (!files || files.length == 0 ) return;
+
+        const productImg = files[0];
+        const supportedTypes = ['image/jpeg', 'image/png'];
+
+        if (supportedTypes.includes(productImg.type)){
+            setProductImg(productImg);
+        }
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!productImg) return;
+
+        const imageFileForm = new FormData();
+        imageFileForm.append('productImg', productImg);
 
         try {
-            await serverApi.post(`/marketplace`, { ...formData })
+            const res = await serverApi.post(`/marketplace`, { ...formData })
+            const {data}: {data: MarketPlacePostApiType} = res.data;
+            await serverApi.patch(`/marketplace/${data._id}`, imageFileForm);
+
             navigate('/dash/profile/me/products')
         } catch (error) {
             alert("Error occured")
             console.log('error')
+            console.log(error)
         }
     }
 
@@ -57,6 +78,10 @@ const CreateProduct = () => {
                         name="details"
                         maxLength={1000}
                     />
+                </div>
+                <div className={`flex flex-col gap-1.5`}>
+                    <label className={`font-semibold`} htmlFor="productImg">Product Image</label>
+                    <input type="file" name="productImg" id="productImg" onChange={e=> handleProductImageChange(e)}/>
                 </div>
                 <div className={`flex flex-col gap-1.5`}>
                     <label className={`font-semibold`} htmlFor="itemType">What Type of Item is it ?</label>

@@ -37,7 +37,7 @@ const Conversation = () => {
             <div className={` flex justify-between items-center p-2 border-b`}>
                 <span className={`font-semibold text-md`}>{roomerUser.username || "Niggendra Bahadur"}</span>
                 <div className="text-center">
-                    <p className={`text-sm font-semibold text-gray-600`}>{roomerUser.location || "Bhadrapur Jhapa"}</p>
+                    <p className={`text-sm font-semibold text-gray-600`}>{roomerUser.location}</p>
                     <p className={`text-sm font-semibold text-gray-600`}>{roomerUser.email}</p>
                 </div>
             </div>

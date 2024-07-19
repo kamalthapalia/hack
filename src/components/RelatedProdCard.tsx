@@ -1,17 +1,37 @@
+import { useEffect, useState } from "react";
 import {AiOutlineClockCircle, AiOutlineDollar} from "react-icons/ai";
 import {LuMapPin} from "react-icons/lu";
 import {GiGoat} from "react-icons/gi";
-import { MarketPlacePostApiType } from "../definations/apiTypes";
-import { timeParser } from "../utils/timeParser";
-import { commaSeprator } from "../utils/commaSeparator";
 import { Link } from "react-router-dom";
 
+import { MarketPlacePostApiType } from "../definations/apiTypes";
+import NotFound from '/newsImgNotLoad.jpg';
+
+import { timeParser } from "../utils/timeParser";
+import { commaSeprator } from "../utils/commaSeparator";
+import { fetchImg } from "../utils/fetcher";
+
+
 const RelatedProdCard = ({product}: {product: MarketPlacePostApiType}) => {
+    const [productImg, setProductImg] = useState('');
+
+    useEffect(()=> {
+        const fetchImage = async() => {
+            const profilePic = await fetchImg(`/marketplace/img/${product.pictureId}`);
+            if (!profilePic){
+                setProductImg(NotFound)
+            }else {
+                setProductImg(profilePic)
+            }
+        }
+        fetchImage();
+    }, [])
+
     return (
         <div className={`flex cursor-pointer`}>
             <img
                 className={`h-[200px] w-[300px] object-cover`} // Adjust the height and width as necessary
-                src="https://images.pexels.com/photos/14717335/pexels-photo-14717335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                src={productImg}
                 alt="Mountain Goat"/>
             <div className={`flex justify-between flex-col px-4`}>
                 <div className={`flex flex-col gap-1.5`}>

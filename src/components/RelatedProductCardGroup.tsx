@@ -25,7 +25,7 @@ const RelatedProductCardGroup = ({itemType}: {itemType: "animal" | "product" | "
 
             {
                 relatedProduct.map(product=> (
-                    <RelatedProdCard product={product}/>
+                    <RelatedProdCard key={product._id} product={product}/>
                 ))
             }
         </div>

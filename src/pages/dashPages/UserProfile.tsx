@@ -1,9 +1,46 @@
-import DashMenuLayout from "../../components/DashMenuLayout.tsx";
-import { useAuth } from "../../hooks/AuthHook.ts";
+import { ChangeEvent, useRef} from "react";
+import { FcAddImage } from "react-icons/fc";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
+import DashMenuLayout from "../../components/DashMenuLayout.tsx";
+import { useAuth } from "../../hooks/AuthHook.ts";
+
+import { serverApi } from "../../utils/axios.ts";
+
 const UserProfile = () => {
-    const { user } = useAuth();
+    const picRef = useRef<HTMLInputElement>(null);
+    const { user, setUser } = useAuth();
+
+    const handleUserImage = () => {
+        picRef.current?.click();
+    }
+
+    // file upload
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files || picRef.current?.files;
+        if (!files || files.length === 0) return;
+        const selectedFile = files[0];
+        const supportedTypes = ['image/jpeg', 'image/png'];
+
+        const formData = new FormData();
+        formData.append('profilePic', selectedFile);
+
+        if (supportedTypes.includes(selectedFile.type)) {
+            try {
+                await serverApi.patch('/users/img', formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
+                setUser(previous => ({...previous, profilePic: URL.createObjectURL(selectedFile)}))
+            } catch (error) {
+                console.log(error)
+            }
+
+        } else {
+            alert("Only jpeg, jpg, png and gif image formats are supported!");
+        }
+    };
 
     return (
         <div className="flex flex-col gap-6">
@@ -11,12 +48,14 @@ const UserProfile = () => {
                 <div className={`flex flex-col items-start bg-gray-100 p-6 rounded-lg shadow-md`}>
                     <div className="w-full flex justify-between items-center">
                         <div className={`flex items-center gap-4 mb-4`}>
-                            <div className={`p-0.5 border-2 border-gray-400 rounded-full`}>
+                            <div className={`relative p-0.5 border-2 border-gray-400 rounded-full`}>
                                 <img
                                     className={`w-20 h-20 rounded-full object-cover`}
-                                    src="https://media.post.rvohealth.io/wp-content/uploads/2023/11/usher-1296x728-header-1296x729.jpg"
+                                    src={user.profilePic}
                                     alt="Profile Avatar"
                                 />
+                                <input type="file" className=" hidden" ref={picRef} accept=".jpg, .jpeg, .png, image/jpeg, image/png" onChange={handleFileChange} />
+                                <FcAddImage className="absolute bottom-1 right-2 text-2xl cursor-pointer" onClick={handleUserImage} />
                             </div>
                             <div>
                                 <p className={`text-xl font-semibold`}>{user.username}</p>

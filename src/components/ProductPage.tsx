@@ -7,8 +7,12 @@ import { Link, useParams } from "react-router-dom";
 import { MarketPlacePostApiType } from "../definations/apiTypes.ts";
 import { serverApi } from "../utils/axios.ts";
 import { timeParser } from "../utils/timeParser.ts";
+import NotFound from '/newsImgNotLoad.jpg';
+import { fetchImg } from "../utils/fetcher.ts";
 
 const ProductPage = () => {
+    const [productImg, setProductImg] = useState(NotFound);
+
     const [product, setProduct] = useState<MarketPlacePostApiType>({} as MarketPlacePostApiType)
     const { itemId } = useParams();
 
@@ -16,6 +20,13 @@ const ProductPage = () => {
         const fetchProduct = async () => {
             const res = await serverApi(`/marketplace/${itemId}`);
             setProduct(res.data.data as MarketPlacePostApiType);
+
+            const profilePic = await fetchImg(`/marketplace/img/${product.pictureId}`);
+            if (!profilePic){
+                setProductImg(NotFound)
+            }else {
+                setProductImg(profilePic)
+            }
         }
         fetchProduct();
     }, [itemId])
@@ -28,7 +39,7 @@ const ProductPage = () => {
                 <div className={`flex top-0 flex-col gap-3`}>
                     <img
                         className={`h-[500px] w-full object-cover`}
-                        src="https://images.pexels.com/photos/14717335/pexels-photo-14717335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        src={productImg}
                         alt="" />
                     <div className={`flex flex-col gap-2`}>
                         <div className={`flex justify-between items-center font-bold`}>
