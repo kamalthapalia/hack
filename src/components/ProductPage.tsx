@@ -18,19 +18,26 @@ const ProductPage = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const res = await serverApi(`/marketplace/${itemId}`);
-            setProduct(res.data.data as MarketPlacePostApiType);
-
-            const profilePic = await fetchImg(`/marketplace/img/${product.pictureId}`);
-            if (!profilePic){
-                setProductImg(NotFound)
-            }else {
-                setProductImg(profilePic)
+            try {
+                const res = await serverApi(`/marketplace/${itemId}`);
+                setProduct(res.data.data as MarketPlacePostApiType);
+    
+                const profilePic = await fetchImg(`/marketplace/img/${res.data.data.pictureId}`);
+                if (!profilePic) {
+                    setProductImg(NotFound)
+                } else {
+                    setProductImg(profilePic)
+                }
+            } catch (error) {
+                console.log('error')
+                alert(error)
             }
         }
         fetchProduct();
     }, [itemId])
 
+    if (!product._id)
+        return <h2>Loading...</h2>
 
     return (
         <div className={`container mx-auto my-10 px-2 sm:px-8`}>
@@ -74,9 +81,12 @@ const ProductPage = () => {
                         </Link>
                     </div>
                 </div>
-                <div className={`h-[80vh] md:overflow-y-scroll`}>
-                    <RelatedProductCardGroup itemType={product.itemType} />
-                </div>
+                {product.itemType && (
+                    <div className={`h-[80vh] md:overflow-y-scroll`}>
+                        <RelatedProductCardGroup itemType={product.itemType} />
+                    </div>
+                )
+                }
             </div>
         </div>
     );

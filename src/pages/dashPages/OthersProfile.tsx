@@ -17,7 +17,8 @@ const OthersProfile = () => {
             const res = await serverApi.get(`/users/${userId}`)
             const {data}: {data: UserType} = res.data;
 
-            const UserProfileImg = await fetchImg(data)
+            const userImageGetUrl = `/users/img/${data.profilePicId}`;
+            const UserProfileImg = await fetchImg(userImageGetUrl)            
             setUser({...data, profilePic: UserProfileImg})
         }
         fetchUserInfo();
