@@ -6,21 +6,25 @@ import { useEffect, useState } from "react";
 import { serverApi } from "../../utils/axios.ts";
 import { UserType } from "../../definations/frontendTypes.ts";
 import { SiImessage } from "react-icons/si";
+import { fetchImg } from "../../utils/fetcher.ts";
 
 const OthersProfile = () => {
     const { userId } = useParams();
+    const [user, setUser] = useState<UserType | null>(null)
 
     useEffect(() => {
         const fetchUserInfo = async () => {
-            const user = await serverApi.get(`/users/${userId}`)
-            // console.log(user.data.data)
-            setUser(user.data.data as UserType)
+            const res = await serverApi.get(`/users/${userId}`)
+            const {data}: {data: UserType} = res.data;
+
+            const userImageGetUrl = `/users/img/${data.profilePicId}`;
+            const UserProfileImg = await fetchImg(userImageGetUrl)            
+            setUser({...data, profilePic: UserProfileImg})
         }
         fetchUserInfo();
 
-    }, [])
+    }, [userId])
 
-    const [user, setUser] = useState({} as UserType)
 
     return (
         <div>
@@ -30,14 +34,15 @@ const OthersProfile = () => {
                         <div className="user-info | flex items-center gap-4 mb-4">
                             <div className={`p-0.5 border-2 border-gray-400 rounded-full`}>
                                 <img
-                                    className={`w-20 h-20 rounded-full object-cover`}
-                                    src="https://media.post.rvohealth.io/wp-content/uploads/2023/11/usher-1296x728-header-1296x729.jpg"
+                                    className={`w-20 h-20 rounded-full object-cover cursor-pointer`}
+                                    src={user?.profilePic}
                                     alt="Profile Avatar"
+                                    onClick={() => window.open(user?.profilePic, '_blank')}
                                 />
                             </div>
                             <div>
-                                <p className={`text-xl font-semibold`}>{user.username}</p>
-                                <p className={`text-sm font-semibold text-gray-500`}>{user.type || "Farmer"}</p>
+                                <p className={`text-xl font-semibold`}>{user?.username}</p>
+                                <p className={`text-sm font-semibold text-gray-500`}>{user?.type}</p>
                             </div>
                         </div>
 
@@ -49,12 +54,12 @@ const OthersProfile = () => {
                     <div className={`flex flex-col gap-2 w-full`}>
                         <div className={`bg-white p-4 rounded-lg shadow-inner`}>
                             <h3 className={`text-lg font-semibold mb-2`}>About</h3>
-                            <p className={`text-sm text-gray-700`}>{user.description || `User Description`}</p>
+                            <p className={`text-sm text-gray-700`}>{user?.description || `User Description`}</p>
                         </div>
                         <div className={`bg-white p-4 rounded-lg shadow-inner`}>
                             <h3 className={`text-lg font-semibold mb-2`}>Contact Information</h3>
-                            <p className={`text-sm text-gray-700`}>Email: {user.email}</p>
-                            <p className={`text-sm text-gray-700`}>Phone: {user.phoneNumber}</p>
+                            <p className={`text-sm text-gray-700`}>Email: {user?.email}</p>
+                            <p className={`text-sm text-gray-700`}>Phone: {user?.phoneNumber}</p>
                         </div>
 
                         {/* TODO: Future goal */}

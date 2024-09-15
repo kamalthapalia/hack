@@ -44,6 +44,11 @@ const ChatList = () => {
 
     return (
         <div className={`h-screen w-60 overflow-y-scroll scrollbar scrollbar-thumb-rounded flex flex-col gap-5 py-4`}>
+            <div>
+                <h2 className=" text-xl text-gray-600 font-semibold leading-7 p-2">People who you have previously contacted with !</h2>
+                <hr className=" h-[1.5px] bg-gray-300" />
+            </div>
+
             {conversationPeople.map(convoPeople => {
                 // calculations
                 const isUnseen = unseenFromUsers.includes(convoPeople._id)

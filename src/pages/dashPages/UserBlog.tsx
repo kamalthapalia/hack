@@ -19,7 +19,7 @@ const UserBlog = () => {
 
 
   return (
-    <BlogCardGroup blogsArray={userBlogs} title={`${user.username}'s blogs`} />
+    <BlogCardGroup isOnHome={false} blogsArray={userBlogs} title={`${user.username}'s blogs`} />
   )
 }
 

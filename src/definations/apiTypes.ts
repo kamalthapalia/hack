@@ -26,11 +26,7 @@ export interface MarketPlacePostApiType {
     itemName: string;
     location: string;
     postedBy: string,
-    pictureUrl: {
-        path: string,
-        name: string,
-        _id: string
-    },
+    pictureId: string,
     price: number;
     itemType: "animal"| "product" | "tool" | "machinery";
     type: 'sale' | 'rent';

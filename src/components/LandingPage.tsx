@@ -46,7 +46,7 @@ const LandingPage = () => {
         <div className="flex flex-col gap-10">
             <Hero />
             <MarketCardGroup title="Latest Marketplace Items" marketPosts={marketPosts} error={error} loading={loading}/>
-            <BlogCardGroup blogsArray={allBlogs} title={"User Blogs"} />
+            <BlogCardGroup isOnHome={true} blogsArray={allBlogs} title={"User Blogs"} />
         </div>
     );
 };

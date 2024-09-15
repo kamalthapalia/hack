@@ -22,11 +22,13 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
         password: '',
         phoneNumber: '',
         description: '',
+        location: '',
+        gender: 'Male',
         type: "Farmer"
     })
 
     const [passwordVisible, setPasswordVisible] = useState(false);
-    
+
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
@@ -74,8 +76,6 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
             ...prevState,
             [name]: value
         }));
-
-        console.log(formData)
     };
 
 
@@ -118,7 +118,18 @@ const SignField = ({ isOnSignUp }: { isOnSignUp: boolean }) => {
                                 <option value="Expert">Expert</option>
                             </select>
                         </div>
+                        <div className="flex flex-col">
+                            <p className=" text-xs sm:text-sm font-bold text-[#ff5672]">Gender</p>
+                            <select name="gender" onChange={(e) => handleFormDataChange(e)} defaultValue={formData.gender} className=" text-[#014368] font-semibold cursor-pointer outline-none text-sm sm:text-base">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
 
+                        <div className={`inputField ${formData.location && "hasContent"}`}>
+                            <span> Your Location ... </span>
+                            <input name="location" value={formData.location} onChange={(e) => handleFormDataChange(e)} required />
+                        </div>
                         <div className={`inputField ${formData.description && "hasContent"}`}>
                             <span> Your Description ... </span>
                             <input name="description" value={formData.description} onChange={(e) => handleFormDataChange(e)} required />

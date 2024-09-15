@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
     return (
         <div className={`h-[99vh] relative`}>
@@ -15,10 +17,10 @@ const Hero = () => {
                             service ensures a seamless shopping experience. Explore our range and discover the perfect
                             nigger for your requirements and budget.
                         </p>
-                        <button
+                        <Link to={'/market'}
                             className={`bg-blue-500 text-white w-fit font-bold py-3 px-10 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300`}>
                             Buy Now
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className={`h-full`}>

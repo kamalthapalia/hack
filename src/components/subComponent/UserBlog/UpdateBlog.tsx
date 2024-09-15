@@ -26,7 +26,7 @@ const UpdateBlog = () => {
 
         try {
             await serverApi.patch(`/blog/${id}`, formData)
-            navigate('/dash/profile/me')
+            navigate('/dash/profile/me/blogs')
         } catch (error) {
             alert("Error occured")
             console.log(error)

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type FormDataType = {
     username: string,
     email: string,
@@ -9,17 +11,22 @@ export type FormDataType = {
 export type UserType = {
     username: string,
     userId: string,
+    profilePicId: string,
+    profilePic: string,
     email: string,
     phoneNumber: number,
-    type: string,
+    type: "Farmer" | "Expert",
     location: string,
-    description?: string
+    description?: string,
+    gender: 'Male' | 'Female',
 };
 
 export type ContextType = {
-    user: UserType,
+    user: UserType;
+    setUser: Dispatch<SetStateAction<UserType>>;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
+    isAuthChecked: boolean;
 }
 
 
